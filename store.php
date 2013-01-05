@@ -142,26 +142,26 @@ function create_sp_item_taxonomies()
 {
 
   $labels = array(
-    'name' => _x( 'Types', 'sparks-store' ),
-    'singular_name' => _x( 'Type', 'sparks-store' ),
-    'search_items' =>  __( 'Search Types' ),
-    'all_items' => __( 'All Types' ),
-    'parent_item' => __( 'Parent Type' ),
-    'parent_item_colon' => __( 'Parent Type:' ),
-    'edit_item' => __( 'Edit Type' ), 
-    'update_item' => __( 'Update Type' ),
-    'add_new_item' => __( 'Add New Type' ),
-    'new_item_name' => __( 'New Type Name' ),
-    'menu_name' => __( 'Types' ),
+    'name' => _x( 'Departments', 'sparks-store' ),
+    'singular_name' => _x( 'Department', 'sparks-store' ),
+    'search_items' =>  __( 'Search Departments' ),
+    'all_items' => __( 'All Departments' ),
+    'parent_item' => __( 'Parent Department' ),
+    'parent_item_colon' => __( 'Parent Department:' ),
+    'edit_item' => __( 'Edit Department' ), 
+    'update_item' => __( 'Update Department' ),
+    'add_new_item' => __( 'Add New Department' ),
+    'new_item_name' => __( 'New Department Name' ),
+    'menu_name' => __( 'Departments' ),
   ); 	
 
-  register_taxonomy('type',array('sp_item'), array(
+  register_taxonomy('department',array('sp_item'), array(
     'hierarchical' => true,
     'labels' => $labels,
     'show_ui' => true,
     'show_admin_column' => true,
     'query_var' => true,
-    'rewrite' => array( 'slug' => 'type' ),
+    'rewrite' => array( 'slug' => '' ),
   ));
 
   $labels = array(
