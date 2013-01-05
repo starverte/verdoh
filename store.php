@@ -54,7 +54,6 @@ function sparks_store_init() {
     'hierarchical' => false,
     'menu_position' => 5,
     'supports' => array( 'title', 'editor', 'thumbnail', 'comments' ),
-    'taxonomies' => array('category', 'post_tag'),
   ); 
 
   register_post_type( 'sp_item', $args );
@@ -136,5 +135,62 @@ function save_item_details(){
   
 }
 // END - Custom Fields
+
+add_action( 'init', 'create_sp_item_taxonomies', 0 );
+
+function create_sp_item_taxonomies() 
+{
+
+  $labels = array(
+    'name' => _x( 'Types', 'sparks-store' ),
+    'singular_name' => _x( 'Type', 'sparks-store' ),
+    'search_items' =>  __( 'Search Types' ),
+    'all_items' => __( 'All Types' ),
+    'parent_item' => __( 'Parent Type' ),
+    'parent_item_colon' => __( 'Parent Type:' ),
+    'edit_item' => __( 'Edit Type' ), 
+    'update_item' => __( 'Update Type' ),
+    'add_new_item' => __( 'Add New Type' ),
+    'new_item_name' => __( 'New Type Name' ),
+    'menu_name' => __( 'Types' ),
+  ); 	
+
+  register_taxonomy('type',array('sp_item'), array(
+    'hierarchical' => true,
+    'labels' => $labels,
+    'show_ui' => true,
+    'show_admin_column' => true,
+    'query_var' => true,
+    'rewrite' => array( 'slug' => 'type' ),
+  ));
+
+  $labels = array(
+    'name' => _x( 'Keywords', 'sparks-store' ),
+    'singular_name' => _x( 'Keyword', 'sparks-store' ),
+    'search_items' =>  __( 'Search Keywords' ),
+    'popular_items' => __( 'Popular Keywords' ),
+    'all_items' => __( 'All Keywords' ),
+    'parent_item' => null,
+    'parent_item_colon' => null,
+    'edit_item' => __( 'Edit Keyword' ), 
+    'update_item' => __( 'Update Keyword' ),
+    'add_new_item' => __( 'Add New Keyword' ),
+    'new_item_name' => __( 'New Keyword Name' ),
+    'separate_items_with_commas' => __( 'Separate keywords with commas' ),
+    'add_or_remove_items' => __( 'Add or remove keywords' ),
+    'choose_from_most_used' => __( 'Choose from the most used keywords' ),
+    'menu_name' => __( 'Keywords' ),
+  ); 
+
+  register_taxonomy('keyword','sp_item',array(
+    'hierarchical' => false,
+    'labels' => $labels,
+    'show_ui' => true,
+    'show_admin_column' => true,
+    'update_count_callback' => '_update_post_term_count',
+    'query_var' => true,
+    'rewrite' => array( 'slug' => '' ),
+  ));
+}
 
 ?>
