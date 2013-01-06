@@ -161,7 +161,7 @@ function create_sp_item_taxonomies()
     'show_ui' => true,
     'show_admin_column' => true,
     'query_var' => true,
-    'rewrite' => array( 'slug' => '' ),
+    'rewrite' => array( 'slug' => 'ec' ),
   ));
 
   $labels = array(
@@ -189,7 +189,7 @@ function create_sp_item_taxonomies()
     'show_admin_column' => true,
     'update_count_callback' => '_update_post_term_count',
     'query_var' => true,
-    'rewrite' => array( 'slug' => '' ),
+    'rewrite' => array( 'slug' => 'kw' ),
   ));
 }
 
