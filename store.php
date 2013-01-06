@@ -48,7 +48,7 @@ function sparks_store_init() {
     'show_ui' => true, 
     'show_in_menu' => true, 
     'query_var' => true,
-    'rewrite' => array( 'slug' => 'store' ),
+    'rewrite' => array( 'slug' => 'items' ),
     'capability_type' => 'post',
     'has_archive' => true, 
     'hierarchical' => false,
@@ -161,7 +161,7 @@ function create_sp_item_taxonomies()
     'show_ui' => true,
     'show_admin_column' => true,
     'query_var' => true,
-    'rewrite' => array( 'slug' => 'ec' ),
+    'rewrite' => array( 'slug' => 'store' ),
   ));
 
   $labels = array(
@@ -189,7 +189,7 @@ function create_sp_item_taxonomies()
     'show_admin_column' => true,
     'update_count_callback' => '_update_post_term_count',
     'query_var' => true,
-    'rewrite' => array( 'slug' => 'kw' ),
+    'rewrite' => array( 'slug' => 'key' ),
   ));
 }
 
