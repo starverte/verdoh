@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Store
+Plugin Name: Sparks Store
 Plugin URI: http://starverte.com/plugins/sparks-store
 Description: Part of the Sparks Framework. A plugin that allows for easy e-commerce development.
 Version: alpha
