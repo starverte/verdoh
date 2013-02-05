@@ -4,7 +4,7 @@ Plugin Name: Sparks Store
 
 Plugin URI: //Not yet developed
 
-GitHub URI: https://github.com/starverte/sparks-events.git
+GitHub URI: https://github.com/starverte/sparks-store.git
 
 Description: Part of the Sparks Framework. A plugin that allows for easy e-commerce development. 
 
