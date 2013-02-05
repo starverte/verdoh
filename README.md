@@ -6,7 +6,7 @@ Plugin URI: //Not yet developed
 
 GitHub URI: https://github.com/starverte/sparks-store.git
 
-Description: Part of the Sparks Framework. A plugin that allows for easy e-commerce development. 
+Description: Part of the Sparks Framework. A plugin that allows for easy e-commerce development. This is not the same as the Offers plugin. The Offers plugin would be used for creating a "classifieds" site; this plugin is used for an online store.
 
 Author: starverte
 
