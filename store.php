@@ -132,10 +132,15 @@ function save_item_details(){
 	return $post_id;
   }
   // save all meta data
-  update_post_meta($post->ID, "item_ref", $_POST["item_ref"]);
-  update_post_meta($post->ID, "item_price", $_POST["item_price"]);
-  update_post_meta($post->ID, "item_shipping", $_POST["item_shipping"]);  
-  
+  if (isset($_POST['item_ref'])) {
+  	update_post_meta($post->ID, "item_ref", $_POST["item_ref"]);
+  }
+  if (isset($_POST['item_price'])) {
+  	update_post_meta($post->ID, "item_price", $_POST["item_price"]);
+  }
+  if (isset($_POST['item_shipping'])) {
+	  update_post_meta($post->ID, "item_shipping", $_POST["item_shipping"]);
+  }  
 }
 // END - Custom Fields
 
