@@ -100,17 +100,14 @@ function sp_item_add_custom_boxes() {
 function sp_item_meta() {
 	global $post;
 	$custom = get_post_custom($post->ID);
-    $item_ref = $custom["item_ref"] [0];
-	$item_price = $custom["item_price"] [0];
-	$item_shipping = $custom["item_shipping"] [0];
 	
 ?>
     <p><label>Reference</label> 
-	<input type="text" size="10" name="item_ref" value="<?php echo $item_ref; ?>" /></p>
+	<input type="text" size="10" name="item_ref" value="<?php if (isset($custom['item_ref'])) { echo $custom["item_ref"] [0]; } ?>" /></p>
     <p><label>Price</label> 
-	<input type="number" size="10" step="0.01" name="item_price" value="<?php echo $item_price; ?>" /></p>
+	<input type="number" size="10" step="0.01" name="item_price" value="<?php if (isset($custom['item_price'])) { echo $custom["item_price"] [0]; } ?>" /></p>
     <p><label>Shipping</label> 
-	<input type="number" size="10" step="0.01" name="item_shipping" value="<?php echo $item_shipping; ?>" /></p>
+	<input type="number" size="10" step="0.01" name="item_shipping" value="<?php if (isset($custom['item_shipping'])) { echo $custom["item_shipping"] [0]; } ?>" /></p>
 	<?php
 }
 
@@ -120,15 +117,15 @@ add_action('save_post', 'save_item_details');
 
 function save_item_details(){
   global $post;
-  if ( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE ) {
+  if ( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE && (isset($post_id)) ) {
 	return $post_id;
   }
 
-  if( defined('DOING_AJAX') && DOING_AJAX ) { //Prevents the metaboxes from being overwritten while quick editing.
+  if( defined('DOING_AJAX') && DOING_AJAX && (isset($post_id)) ) { //Prevents the metaboxes from being overwritten while quick editing.
 	return $post_id;
   }
 
-  if( ereg('/\edit\.php', $_SERVER['REQUEST_URI']) ) { //Detects if the save action is coming from a quick edit/batch edit.
+  if( ereg('/\edit\.php', $_SERVER['REQUEST_URI']) && (isset($post_id)) ) { //Detects if the save action is coming from a quick edit/batch edit.
 	return $post_id;
   }
   // save all meta data
