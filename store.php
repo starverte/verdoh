@@ -108,6 +108,12 @@ function sp_item_meta() {
 	<input type="number" size="10" step="0.01" name="item_price" value="<?php if (isset($custom['item_price'])) { echo $custom["item_price"] [0]; } ?>" /></p>
     <p><label>Shipping</label> 
 	<input type="number" size="10" step="0.01" name="item_shipping" value="<?php if (isset($custom['item_shipping'])) { echo $custom["item_shipping"] [0]; } ?>" /></p>
+    <p><label>Width</label> 
+	<input type="number" size="10" step="0.25" name="item_width" value="<?php if (isset($custom['item_width'])) { echo $custom["item_width"] [0]; } ?>" /></p>
+    <p><label>Height</label> 
+	<input type="number" size="10" step="0.25" name="item_height" value="<?php if (isset($custom['item_height'])) { echo $custom["item_height"] [0]; } ?>" /></p>
+    <p><label>Depth</label> 
+	<input type="number" size="10" step="0.25" name="item_depth" value="<?php if (isset($custom['item_depth'])) { echo $custom["item_depth"] [0]; } ?>" /></p>
 	<?php
 }
 
@@ -137,7 +143,16 @@ function save_item_details(){
   }
   if (isset($_POST['item_shipping'])) {
 	  update_post_meta($post->ID, "item_shipping", $_POST["item_shipping"]);
-  }  
+  }
+  if (isset($_POST['item_width'])) {
+	  update_post_meta($post->ID, "item_width", $_POST["item_width"]);
+  }
+  if (isset($_POST['item_height'])) {
+	  update_post_meta($post->ID, "item_height", $_POST["item_height"]);
+  }
+  if (isset($_POST['item_depth'])) {
+	  update_post_meta($post->ID, "item_depth", $_POST["item_depth"]);
+  }
 }
 // END - Custom Fields
 
@@ -197,5 +212,4 @@ function create_sp_item_taxonomies()
     'rewrite' => array( 'slug' => 'key' ),
   ));
 }
-
 ?>
