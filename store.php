@@ -212,4 +212,50 @@ function create_sp_item_taxonomies()
     'rewrite' => array( 'slug' => 'key' ),
   ));
 }
+
+function item_ref( $before = '<div class="item-ref">Reference #' , $after = '</div>' ) {
+	$custom = get_post_custom();
+	if (isset($custom['item_ref']) && !empty($custom['item_ref'])) {
+		$item_ref = $custom["item_ref"] [0];
+		printf( $before . $item_ref . $after);
+	}
+}
+function item_price( $before = '<div class="item-price">Price: $' , $after = '</div>' ) {
+	$custom = get_post_custom();
+	if (isset($custom['item_price'])) {
+		$item_price = $custom["item_price"] [0];
+		printf( $before . $item_price . $after);
+	}
+}
+function item_shipping( $before = '<div class="item-shipping">Additional Shipping Cost: $' , $after = '</div>' ) {
+	$custom = get_post_custom();
+	if (isset($custom['item_shipping']) && !empty($custom['item_shipping'])) {
+		$item_shipping = $custom["item_shipping"] [0];
+		printf( $before . $item_shipping . $after);
+	}
+}
+function item_dimensions( $before = '<div class="item-dimensions">Dimensions: ' , $after = '</div>', $sep = ' x ', $dimensions = 3, $unit = '"' ) {
+	$custom = get_post_custom();
+	if ( $dimensions = 3 ) {
+		if (isset($custom['item_width'])) {
+			$item_width = $custom["item_width"] [0];
+		}
+		if (isset($custom['item_height'])) {
+			$item_height = $custom["item_height"] [0];
+		}
+		if (isset($custom['item_depth'])) {
+			$item_depth = $custom["item_depth"] [0];
+		}
+		printf( $before . $item_width . $unit . $sep . $item_height . $unit . $sep . $item_depth . $unit . $after );
+	}
+	elseif ( $dimensions = 2 ) {
+		if (isset($custom['item_width'])) {
+			$item_width = $custom["item_width"] [0];
+		}
+		if (isset($custom['item_height'])) {
+			$item_height = $custom["item_height"] [0];
+		}
+		printf( $before . $item_width . $unit . $sep . $item_height . $unit . $after );
+	}
+}
 ?>
