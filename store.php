@@ -213,29 +213,39 @@ function create_sp_item_taxonomies()
   ));
 }
 
-function item_ref( $before = '<div class="item-ref">Reference #' , $after = '</div>' ) {
+function item_ref( $before = '<div class="item-ref">Reference <span>#' , $after = '</span></div>' ) {
 	$custom = get_post_custom();
 	if (isset($custom['item_ref']) && !empty($custom['item_ref'])) {
 		$item_ref = $custom["item_ref"] [0];
 		printf( $before . $item_ref . $after);
 	}
 }
-function item_price( $before = '<div class="item-price">Price: $' , $after = '</div>' ) {
+function item_price( $before = '<div class="item-price">Price: <span>$' , $after = '</span></div>' ) {
 	$custom = get_post_custom();
 	if (isset($custom['item_price'])) {
 		$item_price = $custom["item_price"] [0];
 		printf( $before . $item_price . $after);
 	}
 }
-function item_shipping( $before = '<div class="item-shipping">Additional Shipping Cost: $' , $after = '</div>' ) {
+function item_shipping( $before = '<div class="item-shipping">Additional Shipping Cost: <span>$' , $after = '</span></div>' ) {
 	$custom = get_post_custom();
 	if (isset($custom['item_shipping']) && !empty($custom['item_shipping'])) {
 		$item_shipping = $custom["item_shipping"] [0];
 		printf( $before . $item_shipping . $after);
 	}
 }
-function item_dimensions( $before = '<div class="item-dimensions">Dimensions: ' , $after = '</div>', $sep = ' x ', $dimensions = 3, $unit = '"' ) {
+function item_dimensions( $args = array(), $sep = ' x ' ) {
 	$custom = get_post_custom();
+	$defaults = array (
+		'before' => '<div class="item-dimensions">Dimensions: <span>' ,
+		'after' => '</span></div>' ,
+		'sep1' => $sep,
+		'sep2' => $sep,
+		'dimensions' => 3,
+		'unit' => ' in',
+	);
+	$args = wp_parse_args($args, $defaults);
+	$args = (object) $args;
 	if ( $dimensions = 3 ) {
 		if (isset($custom['item_width'])) {
 			$item_width = $custom["item_width"] [0];
@@ -246,7 +256,7 @@ function item_dimensions( $before = '<div class="item-dimensions">Dimensions: ' 
 		if (isset($custom['item_depth'])) {
 			$item_depth = $custom["item_depth"] [0];
 		}
-		printf( $before . $item_width . $unit . $sep . $item_height . $unit . $sep . $item_depth . $unit . $after );
+		printf( $args->before . $item_width . $args->unit . $args->sep1 . $item_height . $args->unit . $args->sep2 . $item_depth . $args->unit . $args->after );
 	}
 	elseif ( $dimensions = 2 ) {
 		if (isset($custom['item_width'])) {
@@ -255,7 +265,7 @@ function item_dimensions( $before = '<div class="item-dimensions">Dimensions: ' 
 		if (isset($custom['item_height'])) {
 			$item_height = $custom["item_height"] [0];
 		}
-		printf( $before . $item_width . $unit . $sep . $item_height . $unit . $after );
+		printf( $args->before . $item_width . $args->unit . $args->sep . $item_height . $args->unit . $args->after );
 	}
 }
 ?>
