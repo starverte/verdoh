@@ -29,17 +29,17 @@ License: GPLv2 or later
 
 function sparks_store_init() {
   $labels = array(
-    'name' => 'Items',
-    'singular_name' => 'Item',
+    'name' => 'Products',
+    'singular_name' => 'Product',
     'add_new' => 'Add New',
-    'add_new_item' => 'Add New Item',
-    'edit_item' => 'Edit Item',
-    'new_item' => 'New Item',
-    'all_items' => 'All Items',
-    'view_item' => 'View Item',
+    'add_new_item' => 'Add New Product',
+    'edit_item' => 'Edit Product',
+    'new_item' => 'New Product',
+    'all_items' => 'All Products',
+    'view_item' => 'View Product',
     'search_items' => 'Search Store',
-    'not_found' =>  'No items found',
-    'not_found_in_trash' => 'No items found in Trash. Did you check recycling?', 
+    'not_found' =>  'No products found',
+    'not_found_in_trash' => 'No products found in Trash. Did you check recycling?', 
     'parent_item_colon' => '',
     'menu_name' => 'Store'
   );
@@ -59,45 +59,45 @@ function sparks_store_init() {
     'supports' => array( 'title', 'editor', 'thumbnail', 'comments' ),
   ); 
 
-  register_post_type( 'sp_item', $args );
+  register_post_type( 'sp_product', $args );
 }
 add_action( 'init', 'sparks_store_init' );
 
-//add filter to ensure the text Item, or item, is displayed when user updates an item in the Store 
+//add filter to ensure the text Product, or item, is displayed when user updates an item in the Store 
 
-function codex_sp_item_updated_messages( $messages ) {
+function codex_sp_product_updated_messages( $messages ) {
   global $post, $post_ID;
 
-  $messages['sp_item'] = array(
+  $messages['sp_product'] = array(
     0 => '', // Unused. Messages start at index 1.
-    1 => sprintf( __('Item updated. <a href="%s">View item</a>'), esc_url( get_permalink($post_ID) ) ),
+    1 => sprintf( __('Product updated. <a href="%s">View product</a>'), esc_url( get_permalink($post_ID) ) ),
     2 => __('Custom field updated.'),
     3 => __('Custom field deleted.'),
-    4 => __('Item updated.'),
+    4 => __('Product updated.'),
     /* translators: %s: date and time of the revision */
-    5 => isset($_GET['revision']) ? sprintf( __('Item restored to revision from %s'), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
-    6 => sprintf( __('Item now in store. <a href="%s">View item</a>'), esc_url( get_permalink($post_ID) ) ),
-    7 => __('Item saved.'),
-    8 => sprintf( __('Item submitted. <a target="_blank" href="%s">Preview book</a>'), esc_url( add_query_arg( 'preview', 'true', get_permalink($post_ID) ) ) ),
-    9 => sprintf( __('Item scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview item</a>'),
+    5 => isset($_GET['revision']) ? sprintf( __('Product restored to revision from %s'), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
+    6 => sprintf( __('Product now in store. <a href="%s">View product</a>'), esc_url( get_permalink($post_ID) ) ),
+    7 => __('Product saved.'),
+    8 => sprintf( __('Product submitted. <a target="_blank" href="%s">Preview product</a>'), esc_url( add_query_arg( 'preview', 'true', get_permalink($post_ID) ) ) ),
+    9 => sprintf( __('Product scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview product</a>'),
       // translators: Publish box date format, see http://php.net/date
       date_i18n( __( 'M j, Y @ G:i' ), strtotime( $post->post_date ) ), esc_url( get_permalink($post_ID) ) ),
-    10 => sprintf( __('Item draft updated. <a target="_blank" href="%s">Preview item</a>'), esc_url( add_query_arg( 'preview', 'true', get_permalink($post_ID) ) ) ),
+    10 => sprintf( __('Product draft updated. <a target="_blank" href="%s">Preview product</a>'), esc_url( add_query_arg( 'preview', 'true', get_permalink($post_ID) ) ) ),
   );
 
   return $messages;
 }
-add_filter( 'post_updated_messages', 'codex_sp_item_updated_messages' );
+add_filter( 'post_updated_messages', 'codex_sp_product_updated_messages' );
 
 // BEGIN - Create custom fields
-add_action( 'add_meta_boxes', 'sp_item_add_custom_boxes' );
+add_action( 'add_meta_boxes', 'sp_product_add_custom_boxes' );
 
-function sp_item_add_custom_boxes() {
-	add_meta_box('sp_item_meta', 'Details', 'sp_item_meta', 'sp_item', 'side', 'high');
+function sp_product_add_custom_boxes() {
+	add_meta_box('sp_product_meta', 'Details', 'sp_product_meta', 'sp_product', 'side', 'high');
 }
 
-/* Item Details */
-function sp_item_meta() {
+/* Product Details */
+function sp_product_meta() {
 	global $post;
 	$custom = get_post_custom($post->ID);
 	
@@ -156,9 +156,9 @@ function save_item_details(){
 }
 // END - Custom Fields
 
-add_action( 'init', 'create_sp_item_taxonomies', 0 );
+add_action( 'init', 'create_sp_product_taxonomies', 0 );
 
-function create_sp_item_taxonomies() 
+function create_sp_product_taxonomies() 
 {
 
   $labels = array(
@@ -175,7 +175,7 @@ function create_sp_item_taxonomies()
     'menu_name' => __( 'Departments' ),
   ); 	
 
-  register_taxonomy('department',array('sp_item'), array(
+  register_taxonomy('department',array('sp_product'), array(
     'hierarchical' => true,
     'labels' => $labels,
     'show_ui' => true,
@@ -202,7 +202,7 @@ function create_sp_item_taxonomies()
     'menu_name' => __( 'Keywords' ),
   ); 
 
-  register_taxonomy('keyword','sp_item',array(
+  register_taxonomy('keyword','sp_product',array(
     'hierarchical' => false,
     'labels' => $labels,
     'show_ui' => true,
