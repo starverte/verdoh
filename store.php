@@ -246,7 +246,7 @@ function item_dimensions( $args = array(), $sep = ' x ' ) {
 	);
 	$args = wp_parse_args($args, $defaults);
 	$args = (object) $args;
-	if ( $dimensions = 3 ) {
+	if ( $dimensions = 3 && !empty($custom['item_width']) && !empty($custom['item_height']) && !empty($custom['item_depth'])) {
 		if (isset($custom['item_width'])) {
 			$item_width = $custom["item_width"] [0];
 		}
@@ -258,7 +258,7 @@ function item_dimensions( $args = array(), $sep = ' x ' ) {
 		}
 		printf( $args->before . $item_width . $args->unit . $args->sep1 . $item_height . $args->unit . $args->sep2 . $item_depth . $args->unit . $args->after );
 	}
-	elseif ( $dimensions = 2 ) {
+	elseif ( !empty($custom['item_width']) && !empty($custom['item_height']) ) {
 		if (isset($custom['item_width'])) {
 			$item_width = $custom["item_width"] [0];
 		}
