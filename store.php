@@ -215,7 +215,7 @@ function create_sp_product_taxonomies()
 
 function item_ref( $before = '<div class="item-ref">Reference <span>#' , $after = '</span></div>' ) {
 	$custom = get_post_custom();
-	if (isset($custom['item_ref']) && !empty($custom['item_ref'])) {
+	if (isset($custom['item_ref']) && !empty($custom['item_ref'] [0])) {
 		$item_ref = $custom["item_ref"] [0];
 		printf( $before . $item_ref . $after);
 	}
@@ -229,7 +229,7 @@ function item_price( $before = '<div class="item-price">Price: <span>$' , $after
 }
 function item_shipping( $before = '<div class="item-shipping">Additional Shipping Cost: <span>$' , $after = '</span></div>' ) {
 	$custom = get_post_custom();
-	if (isset($custom['item_shipping']) && !empty($custom['item_shipping'])) {
+	if (isset($custom['item_shipping']) && !empty($custom['item_shipping'] [0])) {
 		$item_shipping = $custom["item_shipping"] [0];
 		printf( $before . $item_shipping . $after);
 	}
@@ -246,7 +246,7 @@ function item_dimensions( $args = array(), $sep = ' x ' ) {
 	);
 	$args = wp_parse_args($args, $defaults);
 	$args = (object) $args;
-	if ( $dimensions = 3 && !empty($custom['item_width']) && !empty($custom['item_height']) && !empty($custom['item_depth'])) {
+	if ( $dimensions = 3 && !empty($custom['item_width'] [0]) && !empty($custom['item_height'] [0]) && !empty($custom['item_depth'] [0])) {
 		if (isset($custom['item_width'])) {
 			$item_width = $custom["item_width"] [0];
 		}
@@ -258,14 +258,14 @@ function item_dimensions( $args = array(), $sep = ' x ' ) {
 		}
 		printf( $args->before . $item_width . $args->unit . $args->sep1 . $item_height . $args->unit . $args->sep2 . $item_depth . $args->unit . $args->after );
 	}
-	elseif ( !empty($custom['item_width']) && !empty($custom['item_height']) ) {
+	elseif ( !empty($custom['item_width'] [0]) && !empty($custom['item_height'] [0]) ) {
 		if (isset($custom['item_width'])) {
 			$item_width = $custom["item_width"] [0];
 		}
 		if (isset($custom['item_height'])) {
 			$item_height = $custom["item_height"] [0];
 		}
-		printf( $args->before . $item_width . $args->unit . $args->sep . $item_height . $args->unit . $args->after );
+		printf( $args->before . $item_width . $args->unit . $args->sep1 . $item_height . $args->unit . $args->after );
 	}
 }
 ?>
