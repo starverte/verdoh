@@ -55,6 +55,7 @@ function sparks_store_init() {
     'capability_type' => 'post',
     'has_archive' => true, 
     'hierarchical' => false,
+    'menu_icon' => '',
     'menu_position' => 5,
     'supports' => array( 'title', 'editor', 'thumbnail', 'comments' ),
   ); 
