@@ -1,20 +1,18 @@
-Store
+Verdoh
 =====
-Plugin Name: Sparks Store
+Plugin Name: Verdoh
 
 Plugin URI: //Not yet developed
 
-GitHub URI: https://github.com/starverte/sparks-store.git
+Description: Verdoh is an ecommerce framework for WordPress.
 
-Description: Part of the Sparks Framework. A plugin that allows for easy e-commerce development. This is not the same as the Offers plugin. The Offers plugin would be used for creating a "classifieds" site; this plugin is used for an online store.
-
-Author: starverte
+Author: Star Verte LLC
 
 Author URI: http://starverte.com/
 
 License: GPLv2 or later
 
-License URI: http://www.gnu.org/licenses/
+License URI: http://www.gnu.org/licenses/gpl.html
 
 A spark sets a fire ablaze, and similarly the Sparks Framework is made up of 'sparks' that help initiate
 the creative process of website development within WordPress. Often times to start a fire, a person uses flint and steel.
@@ -33,8 +31,4 @@ of the framework. Then, additional child themes and plugins extend the functiona
     GNU General Public License for more details.
     
     You should have received a copy of the GNU General Public License
-    along with this program; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-    
-    You should have received a copy of the GNU General Public License
-    along with Sparks Store.  If not, see <http://www.gnu.org/licenses/>.
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
