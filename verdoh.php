@@ -1,33 +1,32 @@
 <?php
 /*
-Plugin Name: Sparks Store
-Plugin URI: http://starverte.com/plugins/sparks-store
-Description: Part of the Sparks Framework. A plugin that allows for easy e-commerce development.
-Version: alpha
+Plugin Name: Verdoh for WordPress
+Plugin URI: https://github.com/starverte/verdoh.git
+Description: Verdoh is an ecommerce framework for WordPress.
+Version: 0.1.0
 Author: Star Verte LLC
-Author URI: http://www.starverte.com
+Author URI: http://starverte.com/
 License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/
 
     Copyright 2013  Star Verte LLC  (email : info@starverte.com)
-    
+
     This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License, version 2, as 
-    published by the Free Software Foundation.
-    
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
-    
-    You should have received a copy of the GNU General Public License
-    along with this program; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-    
-    You should have received a copy of the GNU General Public License
-    along with Store.  If not, see <http://www.gnu.org/licenses/>.
+
+    You should have received a copy of the GNU General Public License along
+    with this program; if not, write to the Free Software Foundation, Inc.,
+    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-function sparks_store_init() {
+function verdoh_init() {
   $labels = array(
     'name' => 'Products',
     'singular_name' => 'Product',
@@ -59,16 +58,16 @@ function sparks_store_init() {
     'supports' => array( 'title', 'editor', 'thumbnail', 'comments' ),
   ); 
 
-  register_post_type( 'sp_product', $args );
+  register_post_type( 'v_product', $args );
 }
-add_action( 'init', 'sparks_store_init' );
+add_action( 'init', 'verdoh_init' );
 
 //add filter to ensure the text Product, or item, is displayed when user updates an item in the Store 
 
-function codex_sp_product_updated_messages( $messages ) {
+function codex_v_product_updated_messages( $messages ) {
   global $post, $post_ID;
 
-  $messages['sp_product'] = array(
+  $messages['v_product'] = array(
     0 => '', // Unused. Messages start at index 1.
     1 => sprintf( __('Product updated. <a href="%s">View product</a>'), esc_url( get_permalink($post_ID) ) ),
     2 => __('Custom field updated.'),
@@ -87,17 +86,17 @@ function codex_sp_product_updated_messages( $messages ) {
 
   return $messages;
 }
-add_filter( 'post_updated_messages', 'codex_sp_product_updated_messages' );
+add_filter( 'post_updated_messages', 'codex_v_product_updated_messages' );
 
 // BEGIN - Create custom fields
-add_action( 'add_meta_boxes', 'sp_product_add_custom_boxes' );
+add_action( 'add_meta_boxes', 'v_product_add_custom_boxes' );
 
-function sp_product_add_custom_boxes() {
-	add_meta_box('sp_product_meta', 'Details', 'sp_product_meta', 'sp_product', 'side', 'high');
+function v_product_add_custom_boxes() {
+	add_meta_box('v_product_meta', 'Details', 'v_product_meta', 'v_product', 'side', 'high');
 }
 
 /* Product Details */
-function sp_product_meta() {
+function v_product_meta() {
 	global $post;
 	$custom = get_post_custom($post->ID);
 	
@@ -156,14 +155,14 @@ function save_item_details(){
 }
 // END - Custom Fields
 
-add_action( 'init', 'create_sp_product_taxonomies', 0 );
+add_action( 'init', 'create_v_product_taxonomies', 0 );
 
-function create_sp_product_taxonomies() 
+function create_v_product_taxonomies() 
 {
 
   $labels = array(
-    'name' => _x( 'Departments', 'sparks-store' ),
-    'singular_name' => _x( 'Department', 'sparks-store' ),
+    'name' => _x( 'Departments', 'verdoh' ),
+    'singular_name' => _x( 'Department', 'verdoh' ),
     'search_items' =>  __( 'Search Departments' ),
     'all_items' => __( 'All Departments' ),
     'parent_item' => __( 'Parent Department' ),
@@ -175,7 +174,7 @@ function create_sp_product_taxonomies()
     'menu_name' => __( 'Departments' ),
   ); 	
 
-  register_taxonomy('department',array('sp_product'), array(
+  register_taxonomy('department',array('v_product'), array(
     'hierarchical' => true,
     'labels' => $labels,
     'show_ui' => true,
@@ -185,8 +184,8 @@ function create_sp_product_taxonomies()
   ));
 
   $labels = array(
-    'name' => _x( 'Keywords', 'sparks-store' ),
-    'singular_name' => _x( 'Keyword', 'sparks-store' ),
+    'name' => _x( 'Keywords', 'verdoh' ),
+    'singular_name' => _x( 'Keyword', 'verdoh' ),
     'search_items' =>  __( 'Search Keywords' ),
     'popular_items' => __( 'Popular Keywords' ),
     'all_items' => __( 'All Keywords' ),
@@ -202,7 +201,7 @@ function create_sp_product_taxonomies()
     'menu_name' => __( 'Keywords' ),
   ); 
 
-  register_taxonomy('keyword','sp_product',array(
+  register_taxonomy('keyword','v_product',array(
     'hierarchical' => false,
     'labels' => $labels,
     'show_ui' => true,
